@@ -739,7 +739,7 @@ impl<'a, N: Notify + 'a, T: EventListener> input::ActionContext<T> for ActionCon
             }
         } else if self.terminal().mode().contains(TermMode::BRACKETED_PASTE) {
             self.write_to_pty(&b"\x1b[200~"[..]);
-            self.write_to_pty(text.replace("\x1b", "").into_bytes());
+            self.write_to_pty(text.replace("\x1b", "").replace("\r\n", "\n").into_bytes());
             self.write_to_pty(&b"\x1b[201~"[..]);
         } else {
             // In non-bracketed (ie: normal) mode, terminal applications cannot distinguish
