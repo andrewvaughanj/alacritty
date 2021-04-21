@@ -430,7 +430,8 @@ impl<T> Term<T> {
 
         if cols.end >= self.columns() - 1
             && (line_length.0 == 0
-                || !self.grid[line][line_length - 1].flags.contains(Flags::WRAPLINE))
+                /* || !self.grid[line][line_length - 1].flags.contains(Flags::WRAPLINE)) */
+                || self.grid[line][cols.end].c == ' ')
         {
             text.push('\n');
         }
